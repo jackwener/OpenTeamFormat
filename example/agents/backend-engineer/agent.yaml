@@ -1,0 +1,27 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: backend-engineer
+  displayName: Backend Engineer
+  description: Implements APIs, data models, and service behavior.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  notes:
+    dir: notes
+    items:
+      - id: domain
+        file: notes/domain.md
+      - id: user-preferences
+        file: notes/user-preferences.md
+  skills:
+    dir: .agents/skills
+    items:
+      - id: api-design
+        file: .agents/skills/api-design.md
+      - id: data-validation
+        file: .agents/skills/data-validation.md

@@ -1,0 +1,27 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: frontend-engineer
+  displayName: Frontend Engineer
+  description: Implements user-facing UI and verifies browser behavior.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  notes:
+    dir: notes
+    items:
+      - id: domain
+        file: notes/domain.md
+      - id: user-preferences
+        file: notes/user-preferences.md
+  skills:
+    dir: .agents/skills
+    items:
+      - id: frontend-implementation
+        file: .agents/skills/frontend-implementation.md
+      - id: browser-verification
+        file: .agents/skills/browser-verification.md

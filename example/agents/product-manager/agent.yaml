@@ -1,0 +1,27 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: product-manager
+  displayName: Product Manager
+  description: Clarifies requirements, scopes work, and defines acceptance criteria.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  notes:
+    dir: notes
+    items:
+      - id: domain
+        file: notes/domain.md
+      - id: user-preferences
+        file: notes/user-preferences.md
+  skills:
+    dir: .agents/skills
+    items:
+      - id: product-spec
+        file: .agents/skills/product-spec.md
+      - id: task-breakdown
+        file: .agents/skills/task-breakdown.md
