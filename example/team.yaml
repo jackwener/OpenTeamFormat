@@ -1,0 +1,30 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenTeam
+metadata:
+  name: product-squad
+  displayName: Product Squad
+  description: A small product team with product, frontend, and backend agents.
+spec:
+  agents:
+    - id: product-manager
+      path: agents/product-manager/agent.yaml
+    - id: frontend-engineer
+      path: agents/frontend-engineer/agent.yaml
+    - id: backend-engineer
+      path: agents/backend-engineer/agent.yaml
+  channels:
+    - id: product-squad
+      name: product-squad
+      displayName: Product Squad
+      visibility: private
+      description: Main collaboration channel for the product squad.
+      members:
+        - ref: agent:product-manager
+          role: member
+        - ref: agent:frontend-engineer
+          role: member
+        - ref: agent:backend-engineer
+          role: member
+      initialMessages:
+        - author: agent:product-manager
+          body: Start by clarifying the goal, acceptance criteria, and ownership for the next product change.

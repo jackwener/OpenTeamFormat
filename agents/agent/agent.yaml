@@ -1,0 +1,31 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: agent
+  displayName: Agent
+  description: Base OpenTeamFormat agent package template.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  notes:
+    dir: notes
+    items:
+      - id: domain
+        file: notes/domain.md
+        description: Domain context and terminology.
+      - id: user-preferences
+        file: notes/user-preferences.md
+        description: User preferences and collaboration conventions.
+  skills:
+    dir: .agents/skills
+    items:
+      - id: product-spec
+        file: .agents/skills/product-spec.md
+        description: Turn ambiguous product intent into a concrete spec.
+      - id: task-breakdown
+        file: .agents/skills/task-breakdown.md
+        description: Break scoped work into small parallelizable tasks.
