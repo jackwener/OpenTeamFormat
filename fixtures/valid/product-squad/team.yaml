@@ -1,0 +1,27 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenTeam
+metadata:
+  name: product-squad
+  displayName: Product Squad
+  description: Valid fixture for a small product squad.
+spec:
+  agents:
+    - name: product-manager
+      path: agents/product-manager/agent.yaml
+      description: Clarifies requirements and acceptance criteria.
+    - name: frontend-engineer
+      path: agents/frontend-engineer/agent.yaml
+      description: Implements user-facing UI behavior.
+  channels:
+    - name: product-squad
+      displayName: Product Squad
+      visibility: private
+      description: Main collaboration channel.
+      members:
+        - ref: agent:product-manager
+          role: member
+        - ref: agent:frontend-engineer
+          role: member
+      initialMessages:
+        - author: agent:product-manager
+          body: Clarify the goal and acceptance criteria first.

@@ -69,6 +69,36 @@ In an `OpenTeam` manifest, each `spec.channels[]` entry also uses `name`, not a 
 
 Importers should treat manifests as declarative input and should produce an import mapping after creation instead of writing environment-specific IDs back into the package.
 
+## Schema and Validation
+
+Machine-checkable JSON Schemas live in `schemas/`:
+
+- `schemas/open-agent.schema.json`
+- `schemas/open-team.schema.json`
+
+Fixtures live in `fixtures/`:
+
+- `fixtures/valid/` contains packages and manifests that must pass validation.
+- `fixtures/invalid/` contains intentionally broken packages that must fail validation.
+
+Run validation with:
+
+```sh
+npm install
+npm test
+```
+
+The validator checks both schema shape and repository semantics:
+
+- YAML manifests parse successfully.
+- `OpenAgent` instruction, skill, note, and runtime adapter paths resolve.
+- `spec.notes` may be omitted entirely.
+- `OpenTeam.spec.agents[]` uses `name`, not `id`.
+- `OpenTeam.spec.agents[]` includes `description`.
+- `OpenTeam.spec.channels[]` uses `name`, not `id`.
+- Channel members and initial message authors resolve to declared agent names.
+- Team agent references point to existing OpenAgent manifests whose `metadata.name` matches the reference name.
+
 ## License
 
 OpenTeamFormat is licensed under the Apache License 2.0. See `LICENSE`.

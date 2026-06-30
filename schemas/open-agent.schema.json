@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openteamformat.org/schemas/v1alpha1/open-agent.schema.json",
+  "title": "OpenAgent",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "openteamformat.org/v1alpha1"
+    },
+    "kind": {
+      "const": "OpenAgent"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "displayName", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["instruction", "skills"],
+      "additionalProperties": false,
+      "properties": {
+        "instruction": {
+          "type": "object",
+          "required": ["file"],
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "$ref": "#/$defs/relativePath"
+            }
+          }
+        },
+        "runtimeAdapters": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "claude": {
+              "type": "object",
+              "required": ["instructionFile", "skillsDir"],
+              "additionalProperties": false,
+              "properties": {
+                "instructionFile": {
+                  "$ref": "#/$defs/relativePath"
+                },
+                "skillsDir": {
+                  "$ref": "#/$defs/relativePath"
+                }
+              }
+            }
+          }
+        },
+        "notes": {
+          "type": "object",
+          "required": ["dir", "items"],
+          "additionalProperties": false,
+          "properties": {
+            "optional": {
+              "type": "boolean"
+            },
+            "dir": {
+              "$ref": "#/$defs/relativePath"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/resourceItem"
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "skills": {
+          "type": "object",
+          "required": ["dir", "items"],
+          "additionalProperties": false,
+          "properties": {
+            "dir": {
+              "$ref": "#/$defs/relativePath"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/resourceItem"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "^(?:/|[A-Za-z]:|.*(?:^|/)\\.\\.(?:/|$))"
+      }
+    },
+    "resourceItem": {
+      "type": "object",
+      "required": ["id", "file"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/name"
+        },
+        "file": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

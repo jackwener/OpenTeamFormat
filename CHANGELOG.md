@@ -14,3 +14,6 @@ The format follows explicit `apiVersion` values in manifests. The current draft 
 - Switched `OpenTeam.spec.agents[]` references from `id` to `name`.
 - Removed separate `id` fields from `OpenTeam.spec.channels[]`; channels are identified by `name`.
 - Added Apache-2.0 licensing.
+- Added JSON Schemas for `OpenAgent` and `OpenTeam`.
+- Added valid and invalid fixtures for agent and team manifests.
+- Added a JavaScript validator for schema checks and repository semantic checks.
