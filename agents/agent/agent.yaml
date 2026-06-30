@@ -11,16 +11,6 @@ spec:
     claude:
       instructionFile: CLAUDE.md
       skillsDir: .claude/skills
-  notes:
-    optional: true
-    dir: notes
-    items:
-      - id: domain
-        file: notes/domain.md
-        description: Domain context and terminology.
-      - id: user-preferences
-        file: notes/user-preferences.md
-        description: User preferences and collaboration conventions.
   skills:
     dir: .agents/skills
     items:

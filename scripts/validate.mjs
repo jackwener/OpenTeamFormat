@@ -24,7 +24,7 @@ const checks = [
   { label: "channel uses id", file: "fixtures/invalid/channel-has-id/team.yaml", expected: "invalid" },
   { label: "agent reference missing description", file: "fixtures/invalid/agent-missing-description/team.yaml", expected: "invalid" },
   { label: "team agent schema invalid", file: "fixtures/invalid/team-agent-schema-invalid/team.yaml", expected: "invalid" },
-  { label: "notes file missing", file: "fixtures/invalid/notes-file-missing/agent.yaml", expected: "invalid" }
+  { label: "spec notes present", file: "fixtures/invalid/spec-notes-present/agent.yaml", expected: "invalid" }
 ];
 
 let failures = 0;
@@ -106,12 +106,6 @@ function validateOpenAgent(agent, baseDir, errors) {
   }
   validateResourceItems(baseDir, spec.skills?.items, errors, "skill");
 
-  if (spec.notes) {
-    if (spec.notes.dir) {
-      assertPathExists(baseDir, spec.notes.dir, errors, "notes directory");
-    }
-    validateResourceItems(baseDir, spec.notes.items, errors, "note");
-  }
 }
 
 function validateResourceItems(baseDir, items, errors, label) {
