@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openteamformat.org/schemas/v1alpha1/open-team.schema.json",
+  "title": "OpenTeam",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "openteamformat.org/v1alpha1"
+    },
+    "kind": {
+      "const": "OpenTeam"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "displayName", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["agents", "channels"],
+      "additionalProperties": false,
+      "properties": {
+        "agents": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "path", "description"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/name"
+              },
+              "path": {
+                "$ref": "#/$defs/relativePath"
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "displayName", "description", "members"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/name"
+              },
+              "displayName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "visibility": {
+                "enum": ["public", "private"]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "members": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["ref", "role"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "ref": {
+                      "$ref": "#/$defs/agentRef"
+                    },
+                    "role": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "initialMessages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["author", "body"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "author": {
+                      "$ref": "#/$defs/agentRef"
+                    },
+                    "body": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "^(?:/|[A-Za-z]:|.*(?:^|/)\\.\\.(?:/|$))"
+      }
+    },
+    "agentRef": {
+      "type": "string",
+      "pattern": "^agent:[a-z0-9][a-z0-9-]*$"
+    }
+  }
+}

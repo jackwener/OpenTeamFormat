@@ -1,0 +1,19 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenTeam
+metadata:
+  name: bad-team
+  displayName: Bad Team
+  description: Invalid because channels use id.
+spec:
+  agents:
+    - name: product-manager
+      path: agents/product-manager/agent.yaml
+      description: Clarifies requirements.
+  channels:
+    - id: product-squad
+      name: product-squad
+      displayName: Product Squad
+      description: Main channel.
+      members:
+        - ref: agent:product-manager
+          role: member

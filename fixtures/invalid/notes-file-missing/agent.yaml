@@ -1,0 +1,26 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: notes-file-missing
+  displayName: Notes File Missing
+  description: Invalid because spec.notes references a missing file.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  notes:
+    optional: true
+    dir: notes
+    items:
+      - id: domain
+        file: notes/domain.md
+        description: Missing note file.
+  skills:
+    dir: .agents/skills
+    items:
+      - id: basic-task
+        file: .agents/skills/basic-task.md
+        description: Complete a basic task.

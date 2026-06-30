@@ -1,0 +1,19 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: frontend-engineer
+  displayName: Frontend Engineer
+  description: Implements user-facing UI behavior.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  skills:
+    dir: .agents/skills
+    items:
+      - id: frontend-implementation
+        file: .agents/skills/frontend-implementation.md
+        description: Implement focused UI changes.

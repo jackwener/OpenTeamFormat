@@ -1,0 +1,14 @@
+{
+  "name": "openteamformat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "npm run validate"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "yaml": "^2.8.1"
+  }
+}

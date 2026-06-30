@@ -1,0 +1,19 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: minimal-agent
+  displayName: Minimal Agent
+  description: Minimal valid OpenAgent fixture without notes.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  skills:
+    dir: .agents/skills
+    items:
+      - id: basic-task
+        file: .agents/skills/basic-task.md
+        description: Complete a small task.

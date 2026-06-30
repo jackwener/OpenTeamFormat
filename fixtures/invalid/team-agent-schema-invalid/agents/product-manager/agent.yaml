@@ -1,0 +1,14 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: product-manager
+  displayName: Product Manager
+spec:
+  instruction:
+    file: AGENTS.md
+  skills:
+    dir: .agents/skills
+    items:
+      - id: product-spec
+        file: .agents/skills/product-spec.md
+        description: Write a product spec.
