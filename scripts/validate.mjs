@@ -23,6 +23,7 @@ const checks = [
   { label: "agent reference uses id", file: "fixtures/invalid/team-agent-has-id/team.yaml", expected: "invalid" },
   { label: "channel uses id", file: "fixtures/invalid/channel-has-id/team.yaml", expected: "invalid" },
   { label: "agent reference missing description", file: "fixtures/invalid/agent-missing-description/team.yaml", expected: "invalid" },
+  { label: "team agent schema invalid", file: "fixtures/invalid/team-agent-schema-invalid/team.yaml", expected: "invalid" },
   { label: "notes file missing", file: "fixtures/invalid/notes-file-missing/agent.yaml", expected: "invalid" }
 ];
 
@@ -154,6 +155,7 @@ function validateOpenTeam(team, baseDir, errors) {
         errors.push(`${relative(agentPath)}: metadata.name must match team agent name ${JSON.stringify(agent.name)}`);
       }
       if (parsedAgent?.kind === "OpenAgent") {
+        validateSchema(validateOpenAgentSchema, parsedAgent, agentPath, errors);
         validateOpenAgent(parsedAgent, path.dirname(agentPath), errors);
       }
     }
