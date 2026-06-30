@@ -10,4 +10,5 @@ The format follows explicit `apiVersion` values in manifests. The current draft 
 - Defined the base `OpenAgent` package layout.
 - Added a product squad example with product manager, frontend engineer, backend engineer, and channel membership.
 - Documented `notes/` and `spec.notes` as optional.
+- Documented `OpenTeam.spec.agents[].description` and added descriptions to the team example.
 - Added Apache-2.0 licensing.
