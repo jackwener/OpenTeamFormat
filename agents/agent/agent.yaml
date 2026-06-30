@@ -12,6 +12,7 @@ spec:
       instructionFile: CLAUDE.md
       skillsDir: .claude/skills
   notes:
+    optional: true
     dir: notes
     items:
       - id: domain

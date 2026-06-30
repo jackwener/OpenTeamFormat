@@ -6,15 +6,17 @@ metadata:
   description: A small product team with product, frontend, and backend agents.
 spec:
   agents:
-    - id: product-manager
+    - name: product-manager
       path: agents/product-manager/agent.yaml
-    - id: frontend-engineer
+      description: Clarifies requirements, scopes work, and defines acceptance criteria.
+    - name: frontend-engineer
       path: agents/frontend-engineer/agent.yaml
-    - id: backend-engineer
+      description: Implements user-facing UI and verifies browser behavior.
+    - name: backend-engineer
       path: agents/backend-engineer/agent.yaml
+      description: Implements APIs, data models, and service behavior.
   channels:
-    - id: product-squad
-      name: product-squad
+    - name: product-squad
       displayName: Product Squad
       visibility: private
       description: Main collaboration channel for the product squad.
