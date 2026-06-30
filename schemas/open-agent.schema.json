@@ -64,26 +64,6 @@
             }
           }
         },
-        "notes": {
-          "type": "object",
-          "required": ["dir", "items"],
-          "additionalProperties": false,
-          "properties": {
-            "optional": {
-              "type": "boolean"
-            },
-            "dir": {
-              "$ref": "#/$defs/relativePath"
-            },
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/resourceItem"
-              },
-              "uniqueItems": true
-            }
-          }
-        },
         "skills": {
           "type": "object",
           "required": ["dir", "items"],

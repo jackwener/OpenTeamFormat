@@ -11,14 +11,6 @@ spec:
     claude:
       instructionFile: CLAUDE.md
       skillsDir: .claude/skills
-  notes:
-    optional: true
-    dir: notes
-    items:
-      - id: domain
-        file: notes/domain.md
-      - id: user-preferences
-        file: notes/user-preferences.md
   skills:
     dir: .agents/skills
     items:

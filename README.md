@@ -61,7 +61,7 @@ The current manifests use `openteamformat.org/v1alpha1`.
 
 `OpenAgent` describes one portable agent package. `OpenTeam` describes a bundle of agents and channels.
 
-In an `OpenAgent` manifest, `spec.notes` is optional. Importers must accept agent packages without a `notes/` directory or `spec.notes` section.
+`notes/` is optional package content, but it is not declared in `agent.yaml`. `OpenAgent.spec` does not include a `notes` field; importers should treat the directory as optional context when it exists.
 
 In an `OpenTeam` manifest, each `spec.agents[]` reference uses `name`, not a separate `id`. The `name` should match the referenced `OpenAgent.metadata.name`. Agent references should include a short `description` alongside `name` and `path`; this keeps the team-level composition understandable without opening every agent package.
 
@@ -91,8 +91,8 @@ npm test
 The validator checks both schema shape and repository semantics:
 
 - YAML manifests parse successfully.
-- `OpenAgent` instruction, skill, note, and runtime adapter paths resolve.
-- `spec.notes` may be omitted entirely.
+- `OpenAgent` instruction, skill, and runtime adapter paths resolve.
+- `OpenAgent.spec` does not include `notes`; `notes/` is optional package content outside the manifest.
 - `OpenTeam.spec.agents[]` uses `name`, not `id`.
 - `OpenTeam.spec.agents[]` includes `description`.
 - `OpenTeam.spec.channels[]` uses `name`, not `id`.

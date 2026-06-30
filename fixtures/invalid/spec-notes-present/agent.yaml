@@ -1,9 +1,9 @@
 apiVersion: openteamformat.org/v1alpha1
 kind: OpenAgent
 metadata:
-  name: notes-file-missing
-  displayName: Notes File Missing
-  description: Invalid because spec.notes references a missing file.
+  name: spec-notes-present
+  displayName: Spec Notes Present
+  description: Invalid because OpenAgent.spec must not include notes.
 spec:
   instruction:
     file: AGENTS.md
@@ -12,12 +12,11 @@ spec:
       instructionFile: CLAUDE.md
       skillsDir: .claude/skills
   notes:
-    optional: true
     dir: notes
     items:
       - id: domain
         file: notes/domain.md
-        description: Missing note file.
+        description: This field should not be declared in agent.yaml.
   skills:
     dir: .agents/skills
     items:
