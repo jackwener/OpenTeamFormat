@@ -3,7 +3,7 @@ kind: OpenAgent
 metadata:
   name: minimal-agent
   displayName: Minimal Agent
-  description: Minimal valid OpenAgent fixture without notes.
+  description: Minimal valid OpenAgent fixture.
 spec:
   instruction:
     file: AGENTS.md

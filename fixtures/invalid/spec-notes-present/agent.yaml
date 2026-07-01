@@ -12,11 +12,7 @@ spec:
       instructionFile: CLAUDE.md
       skillsDir: .claude/skills
   notes:
-    dir: notes
-    items:
-      - id: domain
-        file: notes/domain.md
-        description: This field should not be declared in agent.yaml.
+    unexpected: true
   skills:
     dir: .agents/skills
     items:

@@ -7,7 +7,6 @@ OpenTeamFormat is a portable directory format for describing Raft/Slock team tem
 This draft covers:
 
 - Agent metadata and instructions
-- Optional agent-local notes
 - Agent-local skills
 - Runtime adapters for Claude-compatible tools
 - A team manifest that references agents and channel membership
@@ -22,9 +21,6 @@ A single agent package has this layout:
 agent.yaml
 AGENTS.md
 CLAUDE.md -> AGENTS.md
-notes/                         # optional
-  domain.md
-  user-preferences.md
 .agents/
   skills/
     product-spec.md
@@ -38,7 +34,6 @@ File roles:
 - `agent.yaml`: machine-readable OpenAgent manifest.
 - `AGENTS.md`: canonical model instruction for the agent.
 - `CLAUDE.md`: runtime adapter that points directly at `AGENTS.md`.
-- `notes/`: optional portable context and memory for the agent.
 - `.agents/skills/`: canonical skill definitions owned by this agent package.
 - `.claude/skills`: runtime adapter that points directly at `.agents/skills/`.
 
@@ -61,7 +56,7 @@ The current manifests use `openteamformat.org/v1alpha1`.
 
 `OpenAgent` describes one portable agent package. `OpenTeam` describes a bundle of agents and channels.
 
-`notes/` is optional package content, but it is not declared in `agent.yaml`. `OpenAgent.spec` does not include a `notes` field; importers should treat the directory as optional context when it exists.
+OpenAgent packages do not define a `notes/` directory or a `spec.notes` field. Durable context should live in the canonical instruction or skills until the format defines a separate memory/context mechanism.
 
 In an `OpenTeam` manifest, each `spec.agents[]` reference uses `name`, not a separate `id`. The `name` should match the referenced `OpenAgent.metadata.name`. Agent references should include a short `description` alongside `name` and `path`; this keeps the team-level composition understandable without opening every agent package.
 
@@ -92,7 +87,7 @@ The validator checks both schema shape and repository semantics:
 
 - YAML manifests parse successfully.
 - `OpenAgent` instruction, skill, and runtime adapter paths resolve.
-- `OpenAgent.spec` does not include `notes`; `notes/` is optional package content outside the manifest.
+- `OpenAgent` packages do not include `notes/` or `spec.notes`.
 - `OpenTeam.spec.agents[]` uses `name`, not `id`.
 - `OpenTeam.spec.agents[]` includes `description`.
 - `OpenTeam.spec.channels[]` uses `name`, not `id`.
