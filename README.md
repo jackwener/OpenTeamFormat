@@ -20,7 +20,7 @@ A single agent package has this layout:
 ```text
 agent.yaml
 AGENTS.md
-CLAUDE.md -> AGENTS.md
+CLAUDE.md
 .agents/
   skills/
     product-spec.md
@@ -33,7 +33,7 @@ File roles:
 
 - `agent.yaml`: machine-readable OpenAgent manifest.
 - `AGENTS.md`: canonical model instruction for the agent.
-- `CLAUDE.md`: runtime adapter that points directly at `AGENTS.md`.
+- `CLAUDE.md`: Claude runtime adapter that references `@AGENTS.md`.
 - `.agents/skills/`: canonical skill definitions owned by this agent package.
 - `.claude/skills`: runtime adapter that points directly at `.agents/skills/`.
 
@@ -87,6 +87,7 @@ The validator checks both schema shape and repository semantics:
 
 - YAML manifests parse successfully.
 - `OpenAgent` instruction, skill, and runtime adapter paths resolve.
+- `CLAUDE.md` is a real Markdown adapter file, not a symlink, and references `@AGENTS.md`.
 - `OpenAgent` packages do not include `notes/` or `spec.notes`.
 - `OpenTeam.spec.agents[]` uses `name`, not `id`.
 - `OpenTeam.spec.agents[]` includes `description`.

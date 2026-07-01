@@ -24,6 +24,7 @@ const checks = [
   { label: "channel uses id", file: "fixtures/invalid/channel-has-id/team.yaml", expected: "invalid" },
   { label: "agent reference missing description", file: "fixtures/invalid/agent-missing-description/team.yaml", expected: "invalid" },
   { label: "team agent schema invalid", file: "fixtures/invalid/team-agent-schema-invalid/team.yaml", expected: "invalid" },
+  { label: "claude adapter missing @AGENTS.md reference", file: "fixtures/invalid/claude-adapter-missing-reference/agent.yaml", expected: "invalid" },
   { label: "spec notes present", file: "fixtures/invalid/spec-notes-present/agent.yaml", expected: "invalid" }
 ];
 
@@ -96,6 +97,7 @@ function validateOpenAgent(agent, baseDir, errors) {
   const claude = spec.runtimeAdapters?.claude;
   if (claude?.instructionFile) {
     assertPathExists(baseDir, claude.instructionFile, errors, "Claude instruction adapter");
+    validateClaudeInstructionAdapter(baseDir, claude.instructionFile, errors);
   }
   if (claude?.skillsDir) {
     assertPathExists(baseDir, claude.skillsDir, errors, "Claude skills adapter");
@@ -189,6 +191,24 @@ function assertPathExists(baseDir, target, errors, label) {
   const resolved = path.join(baseDir, target);
   if (!fs.existsSync(resolved)) {
     errors.push(`${label} not found: ${relative(resolved)}`);
+  }
+}
+
+function validateClaudeInstructionAdapter(baseDir, target, errors) {
+  const resolved = path.join(baseDir, target);
+  if (!fs.existsSync(resolved)) {
+    return;
+  }
+
+  const stat = fs.lstatSync(resolved);
+  if (stat.isSymbolicLink()) {
+    errors.push(`Claude instruction adapter must be a real Markdown file, not a symlink: ${relative(resolved)}`);
+    return;
+  }
+
+  const content = fs.readFileSync(resolved, "utf8");
+  if (!content.includes("@AGENTS.md")) {
+    errors.push(`Claude instruction adapter must reference @AGENTS.md: ${relative(resolved)}`);
   }
 }
 
