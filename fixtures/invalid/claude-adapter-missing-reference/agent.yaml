@@ -1,0 +1,19 @@
+apiVersion: openteamformat.org/v1alpha1
+kind: OpenAgent
+metadata:
+  name: claude-adapter-missing-reference
+  displayName: Claude Adapter Missing Reference
+  description: Invalid fixture where CLAUDE.md does not reference @AGENTS.md.
+spec:
+  instruction:
+    file: AGENTS.md
+  runtimeAdapters:
+    claude:
+      instructionFile: CLAUDE.md
+      skillsDir: .claude/skills
+  skills:
+    dir: .agents/skills
+    items:
+      - id: basic-task
+        file: .agents/skills/basic-task.md
+        description: Complete a small task.

@@ -17,3 +17,4 @@ The format follows explicit `apiVersion` values in manifests. The current draft 
 - Added valid and invalid fixtures for agent and team manifests.
 - Added a JavaScript validator for schema checks and repository semantic checks.
 - Removed `notes/` package content and `OpenAgent.spec.notes` from the v0 agent package.
+- Changed `CLAUDE.md` from a symlink to a Markdown adapter that references `@AGENTS.md`.
